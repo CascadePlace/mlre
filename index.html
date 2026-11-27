@@ -97,6 +97,23 @@
         <p>Feeding pages through the Cyrus pipes…</p>
       </div>
       <div id="flipbook" class="flipbook"></div>
+      <aside class="guide" id="fbGuide" aria-label="How to use the flipbook" hidden>
+        <p class="guide__no">OPERATING INSTRUCTIONS</p>
+        <h3 class="guide__title">How to read</h3>
+        <ol class="guide__steps">
+          <li><span class="guide__key">↗</span><span><strong>Drag a corner</strong> of the page to turn it, like a real book.</span></li>
+          <li><span class="guide__key">⇆</span><span><strong>Click</strong> the left or right page, or use the <strong>← →</strong> buttons and arrow keys.</span></li>
+          <li><span class="guide__key">≡</span><span><strong>Jump to…</strong> any chapter from the menu above.</span></li>
+          <li><span class="guide__key">⛶</span><span><strong>Fullscreen</strong> for the best view. <strong>⤓</strong> downloads the PDF.</span></li>
+        </ol>
+        <button class="btn btn--small guide__go" id="fbOpen" type="button">Open the book →</button>
+      </aside>
+      <aside class="guide guide--end" id="fbEnd" aria-label="End of book" hidden>
+        <p class="guide__no">END OF VOLUME 1</p>
+        <h3 class="guide__title">Thanks for reading</h3>
+        <p>Stanley’s story continues in Volume 2.</p>
+        <button class="btn btn--small guide__go" id="fbRestart" type="button">← Back to the start</button>
+      </aside>
     </div>
     <p class="reader__hint">On a phone? Turn it sideways to see two pages at once.</p>
   </div>
@@ -144,41 +161,12 @@
 
   <div class="world">
     <figure class="spec">
-      <svg class="spec__drawing" viewBox="0 0 360 460" role="img" aria-labelledby="robTitle">
-        <title id="robTitle">Blueprint line drawing of a robolt: a hexagonal head with a screen face on a threaded bolt shaft.</title>
-        <defs>
-          <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
-        </defs>
-        <g class="ln">
-          <!-- head -->
-          <polygon points="95,70 225,70 250,105 250,170 225,200 95,200 70,170 70,105" />
-          <rect x="110" y="95" width="100" height="70" rx="6" class="screen"/>
-          <rect x="128" y="115" width="18" height="12" class="eye"/>
-          <rect x="174" y="115" width="18" height="12" class="eye"/>
-          <path d="M140,145 Q160,157 180,145" class="smile"/>
-          <!-- shaft -->
-          <rect x="120" y="200" width="80" height="200" />
-          <g class="thread">
-            <path d="M120,215 L200,225"/><path d="M120,235 L200,245"/><path d="M120,255 L200,265"/>
-            <path d="M120,275 L200,285"/><path d="M120,295 L200,305"/><path d="M120,315 L200,325"/>
-            <path d="M120,335 L200,345"/><path d="M120,355 L200,365"/><path d="M120,375 L200,385"/>
-          </g>
-          <ellipse cx="160" cy="410" rx="62" ry="12"/>
-          <path d="M98,410 L98,425 Q160,445 222,425 L222,410"/>
-        </g>
-        <g class="dims">
-          <line x1="40" y1="70" x2="40" y2="430" marker-start="url(#arr)" marker-end="url(#arr)"/>
-          <text x="30" y="255" transform="rotate(-90 30 255)">CHILD-SIZED (PER S.R.)</text>
-          <line x1="70" y1="45" x2="250" y2="45" marker-start="url(#arr)" marker-end="url(#arr)"/>
-          <text x="160" y="38" text-anchor="middle">HEX HEAD · LED FACE</text>
-          <line x1="215" y1="300" x2="290" y2="270"/>
-          <text x="292" y="266" class="note">spine /</text>
-          <text x="292" y="278" class="note">skeleton</text>
-          <line x1="205" y1="130" x2="290" y2="110"/>
-          <text x="292" y="106" class="note">Gen ?</text>
-          <text x="292" y="118" class="note">module</text>
-        </g>
-      </svg>
+      <div class="spec__art">
+        <img src="assets/img/robolt-cover.jpg" alt="The robolt from the front cover: a bolt-shaped robot with a hexagonal head, screen face and a threaded spine, beside a detached body panel." width="900" height="1040" loading="lazy">
+        <span class="spec__note spec__note--panel">swappable<br>body panel</span>
+        
+        
+      </div>
       <figcaption>
         <h3>Robolt</h3>
         <table class="spec__table">

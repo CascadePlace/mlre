@@ -177,8 +177,8 @@ h3 { font: 600 1.05rem/1.3 var(--mono); text-transform: uppercase; letter-spacin
 .flipbook { margin: 0 auto; filter: drop-shadow(0 20px 30px rgba(2, 12, 40, .55)); }
 .flipbook.is-hidden { visibility: hidden; }
 .page { background: #fdfdfb; overflow: hidden; }
-.page__inner { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
-.page canvas { width: 100%; height: 100%; display: block; }
+.page__inner { position: absolute; inset: 0; display: grid; place-items: center; }
+.page canvas { width: 100%; height: auto; display: block; }
 .page__num { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font: .6rem var(--mono); color: #8a96a8; letter-spacing: .15em; pointer-events: none; }
 .page__spinner { width: 28px; height: 28px; border: 2px solid #c9d4e6; border-top-color: var(--bp-600); border-radius: 50%; animation: spin 1s linear infinite; }
 .page--cover { background: var(--bp-600); }
@@ -187,7 +187,7 @@ h3 { font: 600 1.05rem/1.3 var(--mono); text-transform: uppercase; letter-spacin
   background-image: linear-gradient(var(--grid-major) 1px, transparent 1px), linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
   background-size: 24px 24px;
 }
-.page--cover img { width: 100%; height: 100%; object-fit: contain; }
+.page--cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .page--blank .page__inner { background: #f4f6fa; }
 .page--blank p { font: 1.1rem var(--hand); color: #9aa8bf; transform: rotate(-3deg); }
 /* spine shading on inner pages */
@@ -195,6 +195,29 @@ h3 { font: 600 1.05rem/1.3 var(--mono); text-transform: uppercase; letter-spacin
 .page.--left .page__inner::after { right: 0; background: linear-gradient(90deg, transparent, rgba(0,0,0,.12)); }
 .page.--right .page__inner::after { left: 0; background: linear-gradient(270deg, transparent, rgba(0,0,0,.12)); }
 .page--cover .page__inner::after { display: none; }
+
+/* instructions panel that sits in the empty half beside the covers */
+.guide {
+  position: absolute; z-index: 3; box-sizing: border-box;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(1rem, 3vw, 2.25rem);
+  border: 1.5px dashed var(--line-soft);
+  color: var(--ink);
+  animation: guideIn .45s ease both;
+}
+.guide[hidden] { display: none; }
+@keyframes guideIn { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+.guide--end { animation-name: guideInR; }
+@keyframes guideInR { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+.guide__no { margin: 0 0 .5rem; font-size: .68rem; letter-spacing: .25em; color: var(--amber); }
+.guide__title { margin: 0 0 1.25rem; font: 400 clamp(1.8rem, 3.2vw, 2.6rem)/1 var(--display); letter-spacing: .03em; text-transform: uppercase; }
+.guide__steps { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: .9rem; counter-reset: s; }
+.guide__steps li { display: grid; grid-template-columns: 2.4rem 1fr; gap: .8rem; align-items: start; font-size: clamp(.78rem, 1.1vw, .92rem); line-height: 1.5; color: var(--muted); }
+.guide__steps strong { color: var(--ink); font-weight: 600; }
+.guide__key { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border: 1.5px solid var(--line); border-radius: var(--radius); font-size: 1.1rem; color: var(--ink); }
+.guide p { color: var(--muted); }
+.guide__go { align-self: flex-start; }
+@media (max-height: 640px) { .guide__steps li:nth-child(4) { display: none; } }
 
 .reader__loading { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1rem; text-align: center; color: var(--muted); font-size: .85rem; z-index: 2; }
 .reader__loading.is-done { display: none; }
@@ -235,6 +258,16 @@ h3 { font: 600 1.05rem/1.3 var(--mono); text-transform: uppercase; letter-spacin
 @media (max-width: 920px) { .world { grid-template-columns: 1fr; } }
 .spec { margin: 0; border: 1.5px solid var(--line); padding: 1rem; background: rgba(6, 30, 75, .35); position: sticky; top: 90px; }
 @media (max-width: 920px) { .spec { position: static; } }
+.spec__art { position: relative; border: 1px solid var(--line-soft); }
+.spec__art img { width: 100%; }
+.spec__note { position: absolute; font: .95rem/1.15 var(--hand); color: var(--amber); text-shadow: 0 1px 0 rgba(4,20,60,.6); pointer-events: none; }
+.spec__note::before { content: ""; position: absolute; width: 28px; border-top: 1.5px dashed var(--amber); top: .6em; }
+.spec__note--panel { left: 3%; top: 49%; }
+.spec__note--panel::before { display: none; }
+.spec__note--head { right: 2%; top: 3%; text-align: right; }
+.spec__note--head::before { display: none; }
+.spec__note--spine { left: 30%; top: 54%; text-align: right; }
+.spec__note--spine::before { left: calc(100% + 6px); }
 .spec__drawing { width: 100%; height: auto; color: var(--line); }
 .spec__drawing .ln * { fill: none; stroke: var(--line); stroke-width: 2; stroke-linejoin: round; }
 .spec__drawing .screen { fill: rgba(5, 13, 31, .55) !important; }

@@ -14,6 +14,10 @@
     pdf: "book/mlre.pdf",
     frontCover: "book/front-cover.png",
     backCover: "book/back-cover.png",
+    // Book page shape = the cover's shape, so the covers fill their pages.
+    // PDF pages are centred on that page with a little extra paper.
+    pageWidth: 1410,
+    pageHeight: 2250,
     // PDF page 1 is already the front cover, so skip it inside the book.
     skipPdfPages: [1],
     // Chapters by PDF page number.
@@ -38,6 +42,7 @@
     stage: $("fbStage"), loading: $("fbLoading"), count: $("fbCount"),
     prev: $("fbPrev"), next: $("fbNext"), first: $("fbFirst"), last: $("fbLast"),
     chapter: $("fbChapter"), full: $("fbFull"),
+    guide: $("fbGuide"), end: $("fbEnd"), open: $("fbOpen"), restart: $("fbRestart"),
   };
 
   let pdf = null;
@@ -90,7 +95,9 @@
     try {
       const page = await pdf.getPage(pg.pdfPage);
       const base = page.getViewport({ scale: 1 });
-      const viewport = page.getViewport({ scale: targetW / base.width });
+      const box = flip.getBoundsRect();
+      const fit = Math.min(1, (box.height / box.pageWidth) / (base.height / base.width));
+      const viewport = page.getViewport({ scale: (targetW * fit) / base.width });
       const canvas = document.createElement("canvas");
       canvas.width = Math.round(viewport.width);
       canvas.height = Math.round(viewport.height);
@@ -98,6 +105,7 @@
       const inner = pg.el.querySelector(".page__inner");
       const old = inner.querySelector("canvas, .page__spinner");
       if (old) old.remove();
+      canvas.style.width = (fit * 100) + "%";
       inner.prepend(canvas);
       pg.rendered = targetW;
     } catch (err) {
@@ -105,6 +113,12 @@
     } finally {
       pg.rendering = false;
     }
+  }
+
+  // After a resize, re-render visible pages so text stays sharp and fitted.
+  function rerender() {
+    pages.forEach((p) => { p.rendered = 0; });
+    renderAround(flip.getCurrentPageIndex());
   }
 
   function renderAround(idx) {
@@ -126,8 +140,32 @@
     return (nums.length > 1 ? "pp. " + nums[0] + "–" + nums[1] : "p. " + nums[0]) + " / " + total;
   }
 
+  // Show instructions in the empty half beside the front cover,
+  // and an end panel beside the back cover (two-page view only).
+  function placeGuides() {
+    const idx = flip.getCurrentPageIndex();
+    const landscape = flip.getOrientation() === "landscape";
+    const atFront = landscape && idx === 0;
+    const atBack = landscape && idx === pages.length - 1;
+    els.guide.hidden = !atFront;
+    els.end.hidden = !atBack;
+    const panel = atFront ? els.guide : atBack ? els.end : null;
+    if (!panel) return;
+    const b = flip.getBoundsRect();
+    const stage = els.stage.getBoundingClientRect();
+    const book = host.getBoundingClientRect();
+    const left = book.left - stage.left + b.left + (atFront ? 0 : b.pageWidth);
+    Object.assign(panel.style, {
+      left: left + "px",
+      top: (book.top - stage.top + b.top) + "px",
+      width: b.pageWidth + "px",
+      height: b.height + "px",
+    });
+  }
+
   function updateUI() {
     const idx = flip.getCurrentPageIndex();
+    placeGuides();
     els.count.textContent = labelFor(idx);
     els.prev.disabled = els.first.disabled = idx <= 0;
     els.next.disabled = els.last.disabled = idx >= pages.length - 1;
@@ -155,9 +193,9 @@
 
   function sizeHost() {
     // Fit a two-page spread inside the viewport height.
-    const toolbarH = 140;
+    const toolbarH = 210; // nav + toolbar + breathing room
     const availH = Math.max(360, window.innerHeight - toolbarH);
-    const ratio = 612 / 792; // US Letter
+    const ratio = BOOK.pageWidth / BOOK.pageHeight;
     const pageW = availH * ratio;
     host.style.maxWidth = Math.round(pageW * 2) + "px";
     host.style.width = "100%";
@@ -177,12 +215,9 @@
     buildPages(pdf.numPages);
     sizeHost();
 
-    const first = await pdf.getPage(2 <= pdf.numPages ? 2 : 1);
-    const vp = first.getViewport({ scale: 1 });
-
     flip = new St.PageFlip(host, {
-      width: Math.round(vp.width),
-      height: Math.round(vp.height),
+      width: BOOK.pageWidth,
+      height: BOOK.pageHeight,
       size: "stretch",
       minWidth: 240,
       maxWidth: 1000,
@@ -199,6 +234,13 @@
     flip.loadFromHTML(host.querySelectorAll(".page"));
 
     flip.on("flip", (e) => { renderAround(e.data); updateUI(); });
+    // hide the panels as soon as a page starts turning
+    flip.on("changeState", (e) => {
+      if (e.data !== "read") { els.guide.hidden = true; els.end.hidden = true; }
+      else placeGuides();
+    });
+    els.open.addEventListener("click", () => flip.flipNext());
+    els.restart.addEventListener("click", () => goToIndex(0));
     flip.on("changeOrientation", () => { updateUI(); renderAround(flip.getCurrentPageIndex()); });
 
     els.loading.classList.add("is-done");
@@ -228,7 +270,7 @@
     document.addEventListener("fullscreenchange", () => {
       host.style.maxWidth = document.fullscreenElement ? "none" : host.style.maxWidth;
       if (!document.fullscreenElement) sizeHost();
-      setTimeout(() => { flip.update(); renderAround(flip.getCurrentPageIndex()); }, 120);
+      setTimeout(() => { flip.update(); rerender(); placeGuides(); }, 120);
     });
 
     // Arrow keys while the reader is on screen
@@ -245,7 +287,7 @@
     let t;
     window.addEventListener("resize", () => {
       clearTimeout(t);
-      t = setTimeout(() => { if (!document.fullscreenElement) sizeHost(); flip.update(); renderAround(flip.getCurrentPageIndex()); }, 200);
+      t = setTimeout(() => { if (!document.fullscreenElement) sizeHost(); flip.update(); rerender(); placeGuides(); }, 200);
     });
   }
 

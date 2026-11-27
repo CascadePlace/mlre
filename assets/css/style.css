@@ -115,13 +115,10 @@ h3 { font: 600 1.05rem/1.3 var(--mono); text-transform: uppercase; letter-spacin
 .title { font: 400 clamp(2.3rem, 6.4vw, 5.4rem)/.95 var(--display); text-transform: uppercase; letter-spacing: .01em; color: #050d1f; text-shadow: 0 0 0 transparent; }
 .title > span { display: block; white-space: nowrap; }
 .title > span:first-child { -webkit-text-stroke: 0; }
-.title__bolt, .title__nut { display: inline-block; vertical-align: -.02em; }
-.title__bolt { width: .34em; height: .82em; background:
-  linear-gradient(#9aa3ad, #5b636c) top / 100% 22% no-repeat,
-  repeating-linear-gradient(170deg, #c8ced4 0 3px, #7c858e 3px 6px) center 100% / 46% 80% no-repeat;
-  border-radius: 2px; }
-.title__nut { width: .74em; height: .66em; margin: 0 .02em; background: radial-gradient(circle at 50% 50%, transparent 30%, #b9c0c7 31%, #e8ecef 52%, #8c949c 70%);
-  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+.title__bolt, .title__nut { display: inline-block; width: auto; max-width: none; vertical-align: baseline; }
+/* sized to the cap height of Anton so they sit like letters, as on the cover */
+.title__bolt { height: var(--cap, .86em); margin: 0 .01em 0 .02em; }
+.title__nut  { height: var(--cap, .86em); margin: 0 .03em; }
 .hero__by { margin: 1rem 0 0; font-size: .9rem; letter-spacing: .3em; text-transform: uppercase; }
 .hero__by strong { font-weight: 600; }
 .hero__lede { max-width: 52ch; margin: 1.5rem 0 2rem; font-size: 1.05rem; color: var(--muted); }

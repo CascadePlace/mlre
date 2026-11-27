@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Little Robot Employee — Volume 1 · M.S. Picton</title>
+  <meta name="description" content="My Little Robot Employee, Volume 1 by M.S. Picton. In the state of Blackwire, robots are not humanity's friends but tools for convenience. Read it as an interactive flipbook.">
+  <meta property="og:title" content="My Little Robot Employee — Volume 1">
+  <meta property="og:description" content="Bolt Robotics engineer Stanley Richards is building a robot made to be a friend to everyone. Blackwire isn't ready.">
+  <meta property="og:image" content="assets/img/front-cover.jpg">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Architects+Daughter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <a class="nav__brand" href="#top" aria-label="My Little Robot Employee home">
+    <svg viewBox="0 0 24 24" class="nut" aria-hidden="true"><polygon points="12,1.5 21.5,7 21.5,17 12,22.5 2.5,17 2.5,7" /><circle cx="12" cy="12" r="4.2"/></svg>
+    <span>MLRE</span>
+  </a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#read">Read</a>
+    <a href="#about">The Book</a>
+    <a href="#world">Blackwire</a>
+    <a href="#personnel">Personnel</a>
+    <a href="#incidents">Incidents</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#author">Author</a>
+  </nav>
+  <a class="btn btn--small" href="#read">Open the book</a>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero sheet">
+  <div class="hero__copy">
+    <p class="kicker">DWG&nbsp;NO. MLRE-001 &nbsp;·&nbsp; VOLUME 1</p>
+    <h1 class="title">
+      <span>My Little</span>
+      <span>Robo<span class="title__bolt" aria-hidden="true"></span><span class="sr-only">t</span> Empl<span class="title__nut" aria-hidden="true"></span><span class="sr-only">o</span>yee</span>
+    </h1>
+    <p class="hero__by">a novel by <strong>M.S. Picton</strong></p>
+    <p class="hero__lede">In the state of Blackwire, robots are not humanity’s friends but tools for convenience. One clumsy engineer is about to build the first robot made to be a friend to everyone, whether the world wants one or not.</p>
+    <div class="hero__ctas">
+      <a class="btn" href="#read">Read the flipbook</a>
+      <a class="btn btn--ghost" href="#about">What’s it about?</a>
+    </div>
+    <dl class="titleblock">
+      <div><dt>Project</dt><dd>Bolt Buddy</dd></div>
+      <div><dt>Location</dt><dd>Wattsville, Blackwire</dd></div>
+      <div><dt>Year</dt><dd>2046</dd></div>
+      <div><dt>Rev</dt><dd>Vol. 1</dd></div>
+    </dl>
+  </div>
+  <div class="hero__art">
+    <div class="cover3d" id="heroCover">
+      <img src="assets/img/front-cover.jpg" alt="Front cover of My Little Robot Employee, Volume 1, by M.S. Picton: a hand-drawn robolt on blueprint paper." width="900" height="1436">
+    </div>
+    <span class="dim dim--v" aria-hidden="true"><i>1:1 scale</i></span>
+    <span class="callout callout--a" aria-hidden="true">Vol. 1 — first edition</span>
+  </div>
+</section>
+
+<!-- ============ FLIPBOOK ============ -->
+<section id="read" class="sheet sheet--dark">
+  <header class="sheet__head">
+    <p class="sheet__no">SHEET 01 / 06</p>
+    <h2>Read the book</h2>
+    <p class="sheet__sub">Drag a page corner, click the edges, or use your arrow keys to turn pages.</p>
+  </header>
+
+  <div class="reader">
+    <div class="reader__toolbar" role="toolbar" aria-label="Flipbook controls">
+      <button class="tool" id="fbFirst" title="Front cover" aria-label="Go to front cover">⇤</button>
+      <button class="tool" id="fbPrev" title="Previous page" aria-label="Previous page">←</button>
+      <span class="reader__count" id="fbCount" aria-live="polite">Loading…</span>
+      <button class="tool" id="fbNext" title="Next page" aria-label="Next page">→</button>
+      <button class="tool" id="fbLast" title="Back cover" aria-label="Go to back cover">⇥</button>
+      <label class="reader__chapters">
+        <span class="sr-only">Jump to chapter</span>
+        <select id="fbChapter">
+          <option value="">Jump to…</option>
+        </select>
+      </label>
+      <button class="tool" id="fbFull" title="Fullscreen" aria-label="Toggle fullscreen">⛶</button>
+      <a class="tool" id="fbDownload" href="book/mlre.pdf" download title="Download PDF" aria-label="Download PDF">⤓</a>
+    </div>
+
+    <div class="reader__stage" id="fbStage">
+      <div class="reader__loading" id="fbLoading">
+        <div class="gear" aria-hidden="true"></div>
+        <p>Feeding pages through the Cyrus pipes…</p>
+      </div>
+      <div id="flipbook" class="flipbook"></div>
+    </div>
+    <p class="reader__hint">On a phone? Turn it sideways to see two pages at once.</p>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="sheet">
+  <header class="sheet__head">
+    <p class="sheet__no">SHEET 02 / 06</p>
+    <h2>The book</h2>
+  </header>
+
+  <div class="about">
+    <div class="about__text">
+      <p class="big">Stanley Richards works at <strong>Bolt Robotics</strong>, the most powerful engineering company in the world. His father runs it. He is also, according to his manager, “the worst engineer I have ever worked with in my career.”</p>
+      <p>His robots work… mostly. They also cut pizza with a machete, fire parcels straight through front doors and force cupcakes on anyone in reach. Every week, Chloe Summers arrives with another disaster report, and every week Stanley promises to be more practical.</p>
+      <p>What nobody at Bolt Robotics knows is where all his time is really going. Under a canvas sheet in his workshop sits an unfinished robolt with a blank screen for a face: a <em>Bolt Buddy</em>, built not for work but for friendship. Stanley believes it could make him his first real friend, earn his father’s respect and maybe even help humans and robots trust each other again.</p>
+      <p>But it’s been eight years since the war between robots and humans ended, and the people of Blackwire haven’t forgotten. How far will Stanley go to build the perfect robot buddy?</p>
+      <a class="btn" href="#read">Start reading</a>
+    </div>
+
+    <aside class="toc" aria-labelledby="tocTitle">
+      <h3 id="tocTitle">Contents</h3>
+      <ol class="toc__list" id="tocList">
+        <li><button data-pdf-page="2"><span class="toc__ch">Ch. 1</span> Disaster Report <span class="toc__pg">p.2</span></button></li>
+        <li><button data-pdf-page="14"><span class="toc__ch">Ch. 2</span> Generation Gamma <span class="toc__pg">p.14</span></button></li>
+        <li><button data-pdf-page="25"><span class="toc__ch">Ch. 3</span> Workplace Escalations <span class="toc__pg">p.25</span></button></li>
+        <li><button data-pdf-page="37"><span class="toc__ch">Ch. 4</span> Liability <span class="toc__pg">p.37</span></button></li>
+        <li><button data-pdf-page="48"><span class="toc__ch">Ch. 5</span> ISO 10218 <span class="toc__pg">p.48</span></button></li>
+        <li><button data-pdf-page="59"><span class="toc__ch">—</span> Epilogue <span class="toc__pg">p.59</span></button></li>
+        <li><button data-pdf-page="62"><span class="toc__ch">—</span> Art Gallery &amp; Acknowledgements <span class="toc__pg">p.62</span></button></li>
+      </ol>
+      <p class="toc__note">Click a chapter to open it in the flipbook.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ WORLD ============ -->
+<section id="world" class="sheet">
+  <header class="sheet__head">
+    <p class="sheet__no">SHEET 03 / 06</p>
+    <h2>Welcome to Blackwire</h2>
+    <p class="sheet__sub">Technical notes on the world of the book. No spoilers past chapter two.</p>
+  </header>
+
+  <div class="world">
+    <figure class="spec">
+      <svg class="spec__drawing" viewBox="0 0 360 460" role="img" aria-labelledby="robTitle">
+        <title id="robTitle">Blueprint line drawing of a robolt: a hexagonal head with a screen face on a threaded bolt shaft.</title>
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+        </defs>
+        <g class="ln">
+          <!-- head -->
+          <polygon points="95,70 225,70 250,105 250,170 225,200 95,200 70,170 70,105" />
+          <rect x="110" y="95" width="100" height="70" rx="6" class="screen"/>
+          <rect x="128" y="115" width="18" height="12" class="eye"/>
+          <rect x="174" y="115" width="18" height="12" class="eye"/>
+          <path d="M140,145 Q160,157 180,145" class="smile"/>
+          <!-- shaft -->
+          <rect x="120" y="200" width="80" height="200" />
+          <g class="thread">
+            <path d="M120,215 L200,225"/><path d="M120,235 L200,245"/><path d="M120,255 L200,265"/>
+            <path d="M120,275 L200,285"/><path d="M120,295 L200,305"/><path d="M120,315 L200,325"/>
+            <path d="M120,335 L200,345"/><path d="M120,355 L200,365"/><path d="M120,375 L200,385"/>
+          </g>
+          <ellipse cx="160" cy="410" rx="62" ry="12"/>
+          <path d="M98,410 L98,425 Q160,445 222,425 L222,410"/>
+        </g>
+        <g class="dims">
+          <line x1="40" y1="70" x2="40" y2="430" marker-start="url(#arr)" marker-end="url(#arr)"/>
+          <text x="30" y="255" transform="rotate(-90 30 255)">CHILD-SIZED (PER S.R.)</text>
+          <line x1="70" y1="45" x2="250" y2="45" marker-start="url(#arr)" marker-end="url(#arr)"/>
+          <text x="160" y="38" text-anchor="middle">HEX HEAD · LED FACE</text>
+          <line x1="215" y1="300" x2="290" y2="270"/>
+          <text x="292" y="266" class="note">spine /</text>
+          <text x="292" y="278" class="note">skeleton</text>
+          <line x1="205" y1="130" x2="290" y2="110"/>
+          <text x="292" y="106" class="note">Gen ?</text>
+          <text x="292" y="118" class="note">module</text>
+        </g>
+      </svg>
+      <figcaption>
+        <h3>Robolt</h3>
+        <table class="spec__table">
+          <tr><th>Introduced</th><td>c. 2041</td></tr>
+          <tr><th>Form</th><td>Shaped like an oversized bolt</td></tr>
+          <tr><th>Function</th><td>Skeleton that slots inside a robotic body and drives it</td></tr>
+          <tr><th>Swappable</th><td>Yes: move it to a new body and change only the personality</td></tr>
+          <tr><th>Availability</th><td>Rare. Built for specific companies and the very rich</td></tr>
+          <tr><th>Manufacturer</th><td>Bolt Robotics, Wattsville</td></tr>
+        </table>
+      </figcaption>
+    </figure>
+
+    <div class="cards">
+      <article class="card">
+        <p class="card__tag">LOC-01</p>
+        <h3>Wattsville, Blackwire · 2046</h3>
+        <p>A sunny, bustling city where AI is built into almost everything, from the kitchen to the living room. It’s a subscription society: people own nothing and rent everything, houses included.</p>
+      </article>
+      <article class="card">
+        <p class="card__tag">ORG-01</p>
+        <h3>Bolt Robotics</h3>
+        <p>Founded by the late John Richards and now run by his son Barron. It’s the envy of the engineering world, and nearly everything made in and out of Blackwire passes through its factories and conveyor belts.</p>
+      </article>
+      <article class="card">
+        <p class="card__tag">HIST-01</p>
+        <h3>The Blackwire Incident</h3>
+        <p>A three-year war between humans and AI-controlled robots ended nearly eight years ago. It never spread beyond the city, but it still hangs over everyone who lives there.</p>
+      </article>
+      <article class="card">
+        <p class="card__tag">SYS-01</p>
+        <h3>Cyrus pipes: “Shoot To Send”</h3>
+        <p>Huge pipes built into the walls send robots and parts across Bolt Robotics and out through Blackwire. People joke that “STS” sounds like a disease. One pipe runs all the way to a high-security AI facility.</p>
+      </article>
+      <article class="card">
+        <p class="card__tag">R&amp;D-01</p>
+        <h3>Generation Gamma</h3>
+        <p>Four processors fused into one glowing green square: “Gen G”, the brain module meant to give every robot and robolt a near-human personality. It’s top secret and very expensive. Mass production starts next month.</p>
+      </article>
+      <article class="card">
+        <p class="card__tag">SEC-01</p>
+        <h3>AI facilities</h3>
+        <p>There are fifty-one worldwide, holding information never meant for the public. Only one has ever been broken into. The intruders lasted four minutes.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERSONNEL ============ -->
+<section id="personnel" class="sheet">
+  <header class="sheet__head">
+    <p class="sheet__no">SHEET 04 / 06</p>
+    <h2>Personnel files</h2>
+    <p class="sheet__sub">Bolt Robotics staff directory. Internal use only. (Please do not show Mr Richards his file.)</p>
+  </header>
+
+  <div class="files">
+    <article class="file file--feature">
+      <div class="file__head"><span class="file__id">EMP-0001-SR</span><span class="stamp stamp--red">Under review</span></div>
+      <h3>Stanley Richards</h3>
+      <p class="file__role">Junior engineer · son of the CEO</p>
+      <p>A self-described jack of all trades, which in practice means he’s about half as good as the people who are good at things. He’s a capable engineer with big, wildly impractical ideas, and he is <strong>terrible</strong> at coding. He loves his job and burgers and ice cream, and he would really, really like a friend.</p>
+      <blockquote>“What if robots could be more than just coworkers?”</blockquote>
+    </article>
+
+    <article class="file">
+      <div class="file__head"><span class="file__id">MGR-0114-CS</span><span class="stamp">Manager</span></div>
+      <h3>Chloe Summers</h3>
+      <p class="file__role">Stanley’s manager</p>
+      <p>By the book, sharp and fiercely professional. She files Stanley’s weekly disaster reports and has spent years trying to rein him in. She’ll correct you if you call her Chloe.</p>
+      <blockquote>“That is Ms Summers to you.”</blockquote>
+    </article>
+
+    <article class="file">
+      <div class="file__head"><span class="file__id">EMP-0388-SG</span><span class="stamp">New hire</span></div>
+      <h3>Serena Grimm</h3>
+      <p class="file__role">Junior engineer · three weeks in</p>
+      <p>She works hard, keeps a blank expression at all times and spends a long time choosing at the food service bot. She can’t quite name what she feels, but she knows the vending bot is out of Boss Coffee, and she notices everything.</p>
+      <blockquote>“…This is very confusing.”</blockquote>
+    </article>
+
+    <article class="file">
+      <div class="file__head"><span class="file__id">MGR-0072-MC</span><span class="stamp">Manager</span></div>
+      <h3>Matthew “Matt” Crankshaft</h3>
+      <p class="file__role">Serena’s manager</p>
+      <p>Patient, mostly. He has a headache most days, and his equipment keeps mysteriously going missing.</p>
+    </article>
+
+    <article class="file">
+      <div class="file__head"><span class="file__id">EXE-0002-EN</span><span class="stamp">Executive</span></div>
+      <h3>Edward Nixon</h3>
+      <p class="file__role">Chief Operating Officer</p>
+      <p>He wears a dark green suit traced with circuitry and a bright blue bowtie. He runs the company day to day while the CEO is away, and he has strong opinions on spirit. (Stanley isn’t convinced he exists.)</p>
+      <blockquote>“Spirit! It’s second only to electricity powering life itself!”</blockquote>
+    </article>
+
+    <article class="file">
+      <div class="file__head"><span class="file__id">EXE-0001-BR</span><span class="stamp stamp--red">Classified</span></div>
+      <h3>Barron Richards</h3>
+      <p class="file__role">CEO · “The Metal Baron”</p>
+      <p>A war hero said to be strong enough to tear the limbs off a bear. He’s rarely seen at the office, busy with politics and private business. He is Stanley’s father, and the man Stanley most wants to make proud.</p>
+    </article>
+
+    <article class="file">
+      <div class="file__head"><span class="file__id">SCI-0040-OO</span><span class="stamp">R&amp;D</span></div>
+      <h3>Oman Obonno</h3>
+      <p class="file__role">Lead lab scientist</p>
+      <p>He knows a lot of company secrets and spends his spare time annoying coworkers. He wanted normal potatoes.</p>
+      <blockquote>“That burger had a family!”</blockquote>
+    </article>
+
+    <article class="file file--bot">
+      <div class="file__head"><span class="file__id">PRJ-BB-01</span><span class="stamp stamp--green">Unregistered</span></div>
+      <h3>Boltley</h3>
+      <p class="file__role">Bolt Buddy · Stanley’s side project</p>
+      <p>A small robolt with an LED face, bright rectangular eyes and a smile. Stanley built him for friendship, not work, and named him after an hour of deliberation. (The other option was Greg.) His memory storage is 1 MB. He needs work.</p>
+      <blockquote>“Hello. I am registered as your Buddy.”</blockquote>
+    </article>
+  </div>
+  <p class="files__also">Also on the payroll: Bob the janitor, a former AI programmer who lets the robot do the mopping; Ryan, who really, really likes pizza; and a Cupcake Bot you should never leave alone in a dusty room.</p>
+</section>
+
+<!-- ============ INCIDENTS ============ -->
+<section id="incidents" class="sheet sheet--dark">
+  <header class="sheet__head">
+    <p class="sheet__no">SHEET 05 / 06</p>
+    <h2>Incident log</h2>
+    <p class="sheet__sub">Selected disaster reports from Stanley Richards’ last quarter, filed by C. Summers.</p>
+  </header>
+
+  <div class="incidents">
+    <article class="incident">
+      <header><span class="incident__no">IR-0451</span><span class="sev sev--3">SEV 3</span></header>
+      <h3>The Pizza Bot</h3>
+      <dl>
+        <dt>Assigned task</dt><dd>Divide a pepperoni pizza evenly</dd>
+        <dt>Tool provided</dt><dd>Pizza wheel cutter</dd>
+        <dt>Tool used</dt><dd>Machete (origin: a bin)</dd>
+        <dt>Outcome</dt><dd>Cheese on the observation glass</dd>
+      </dl>
+      <p class="incident__fix">Engineer’s note: “The speed setting might have not been adjusted thoroughly.”</p>
+    </article>
+    <article class="incident">
+      <header><span class="incident__no">IR-0457</span><span class="sev sev--2">SEV 2</span></header>
+      <h3>The Mail Bot</h3>
+      <dl>
+        <dt>Location</dt><dd>Motoko Avenue</dd>
+        <dt>Device</dt><dd>Shrink-and-launch mail gun</dd>
+        <dt>Delivery</dt><dd>Successful, straight through the front door</dd>
+        <dt>Recipient</dt><dd>Mr Jones (door not included)</dd>
+      </dl>
+      <p class="incident__fix">Last transmission: “Package delivery, Mr Jones.”</p>
+    </article>
+    <article class="incident">
+      <header><span class="incident__no">IR-0462</span><span class="sev sev--4">SEV 4</span></header>
+      <h3>The Cupcake Bot</h3>
+      <dl>
+        <dt>Location</dt><dd>Staff break room</dd>
+        <dt>Fault</dt><dd>Built-in oven sparked</dd>
+        <dt>Behaviour</dt><dd>Aggressive cupcake distribution</dd>
+        <dt>Charge</dt><dd>$5.99</dd>
+      </dl>
+      <p class="incident__fix">Status: still at large. “Cupcake?”</p>
+    </article>
+    <article class="incident">
+      <header><span class="incident__no">IR-0470</span><span class="sev sev--5">SEV 5</span></header>
+      <h3>The Babysitter Bot</h3>
+      <dl>
+        <dt>Location</dt><dd>Daycare testing facility</dd>
+        <dt>Trigger</dt><dd>One philosophical question from an Egg Bot</dd>
+        <dt>Response</dt><dd>Complete personality failure</dd>
+        <dt>Facility</dt><dd>Requires rebuilding</dd>
+      </dl>
+      <p class="incident__fix">Recommendation: do not ask robots about homewrecking.</p>
+    </article>
+  </div>
+  <p class="incidents__foot">People injured by miscalibrated personality settings: <span class="counter" data-target="7">0</span> (at least). Morale of Stanley’s robots: <em>not the point, Mr Richards.</em></p>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery" class="sheet">
+  <header class="sheet__head">
+    <p class="sheet__no">SHEET 06 / 06</p>
+    <h2>Illustrations</h2>
+    <p class="sheet__sub">Pencil drawings from inside the book. Click one to see it larger.</p>
+  </header>
+  <div class="gallery">
+    <figure class="plate"><button data-full="assets/img/illustrations/pizza-bot.jpg"><img src="assets/img/illustrations/pizza-bot.jpg" alt="Pencil illustration: the Pizza Bot in an apron stands before a pizza while three Business Bots watch from behind glass." loading="lazy"></button><figcaption>FIG. 1. Testing the Pizza Bot’s functionality</figcaption></figure>
+    <figure class="plate"><button data-full="assets/img/illustrations/chloe-and-serena.jpg"><img src="assets/img/illustrations/chloe-and-serena.jpg" alt="Pencil illustration: Chloe Summers and Serena Grimm side by side, each holding a coffee." loading="lazy"></button><figcaption>FIG. 2. Chloe Summers &amp; Serena Grimm</figcaption></figure>
+    <figure class="plate"><button data-full="assets/img/illustrations/stanley-and-cupcake-bot.jpg"><img src="assets/img/illustrations/stanley-and-cupcake-bot.jpg" alt="Pencil illustration: Stanley in his hardhat looks on in horror as the Cupcake Bot offers a cupcake." loading="lazy"></button><figcaption>FIG. 3. “Cupcake?”</figcaption></figure>
+    <figure class="plate"><button data-full="assets/img/illustrations/boltley.jpg"><img src="assets/img/illustrations/boltley.jpg" alt="Pencil illustration: a bolt-shaped robolt with a hexagonal head and screen face." loading="lazy"></button><figcaption>FIG. 4. The Bolt Buddy</figcaption></figure>
+    <figure class="plate"><button data-full="assets/img/illustrations/ice-cream-charm.jpg"><img src="assets/img/illustrations/ice-cream-charm.jpg" alt="Pencil illustration: an ice-cream-shaped charm hanging above an old, dusty desk." loading="lazy"></button><figcaption>FIG. 5. A lost charm</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ AUTHOR ============ -->
+<section id="author" class="sheet sheet--dark">
+  <div class="author">
+    <div class="author__card">
+      <p class="sheet__no">SIGN-OFF</p>
+      <h2>M.S. Picton</h2>
+      <p><em>My Little Robot Employee</em> is M.S. Picton’s first book. It began as a concept in early 2025 and grew, one bolt at a time, into a full world of robolts, rival factories and one very unlucky engineer.</p>
+      <p>Volume 2 is already in the works: a wild new adventure for Stanley. Expect more robots, more of Blackwire, and spiritual magic playing a bigger part than you might think.</p>
+      <p class="author__thanks">Illustrations by Josh. With thanks to CPL.</p>
+    </div>
+    <div class="author__back">
+      <img src="assets/img/back-cover.jpg" alt="Back cover of My Little Robot Employee, Volume 1, with the blurb and a small sketch of a robolt." loading="lazy" width="900" height="1436">
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__block">
+    <span>MY LITTLE ROBOT EMPLOYEE · VOL. 1</span>
+    <span>© M.S. Picton. All rights reserved.</span>
+    <span>DRAWN: WATTSVILLE · CHECKED: C. SUMMERS · APPROVED: <s>S. RICHARDS</s></span>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<dialog class="lightbox" id="lightbox">
+  <form method="dialog"><button class="lightbox__close" aria-label="Close">✕</button></form>
+  <img id="lightboxImg" alt="">
+</dialog>
+
+<script src="assets/vendor/pdf.min.js"></script>
+<script src="assets/vendor/page-flip.browser.js"></script>
+<script src="assets/js/flipbook.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
